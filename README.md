@@ -27,7 +27,7 @@ npm init -y
 #### Step 2 — Configure package.json
 
 ##### Refer: 
-Section "Packages Created and Published" for already published packages
+Section "Custom packages Created and Published" for already published packages
 
 #### Step 3 — Install Helper Libraries
 
@@ -40,10 +40,98 @@ npm install fs-extra chalk ora prompts execa
 
 ##### Create: bin/index.js
 
-##### Refer: 
-Section "Packages Created and Published" for already published packages
+Keep
+```
+#!/usr/bin/env node
+```
+at the top.
 
-#### Step 7 — Local Testing
+##### Refer: Section "Custom packages Created and Published" for already published packages
+
+#### Step 5. Refer Section *Local Testing* and *Publish to npm* after all the code has been updated according to your file structure.
+
+# npm-packages TS
+
+### Setup should look like this
+```
+<package-name>/
+├── bin/
+│   └── index.ts
+│
+├── dist/
+│   └── index.js
+│
+├── templates/
+│   └── default/
+│       ├── <your folder>/
+│       ├── <your folder>/
+│       └── ...
+├── package.json
+├── tsconfig.json
+```
+#### 1. Install TypeScript
+
+```
+npm install -D typescript @types/node
+```
+
+#### 2. Create tsconfig.json
+
+```
+npx tsc --init
+```
+
+Update it:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "bin",
+    "strict": true
+  }
+}
+```
+
+#### 3. Your bin/index.ts
+
+Keep
+```
+#!/usr/bin/env node
+```
+at the top.
+
+##### Refer: Section "Custom packages Created and Published" for already published packages
+
+#### 4. Update package.json
+
+IMPORTANT:
+
+Your "bin" must point to the COMPILED JS file, not .ts.
+```json
+{
+  "name": "package-name",
+  "version": "1.0.0",
+  "type": "module",
+
+  "bin": {
+    "package-name": "./dist/index.js"
+  },
+
+  "scripts": {
+    "build": "tsc"
+  }
+}
+```
+
+#### 5. Refer Section *Local Testing* and *Publish to npm* after all the code has been updated according to your file structure.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Local Testing
 
 Before publishing to npm:
 
@@ -114,7 +202,7 @@ Before publishing to npm:
   - This will run the CLI in the same way when we would install from npm.
     
 
-#### Step 8 — Publish to npm
+## Publish to npm
 
 *Checks*: 
 - Make sure your registery is set to registry.npmjs.org and not local registry like we have set for Verdaccio above:
@@ -147,88 +235,7 @@ Now users can run:
 npm create <package-name>@latest
 ```
 
-# npm-packages TS
-
-### Setup should look like this
-```
-<package-name>/
-├── bin/
-│   └── index.ts
-│
-├── dist/
-│   └── index.js
-│
-├── templates/
-│   └── default/
-│       ├── <your folder>/
-│       ├── <your folder>/
-│       └── ...
-├── package.json
-├── tsconfig.json
-```
-#### 1. Install TypeScript
-
-```
-npm install -D typescript @types/node
-```
-
-#### 2. Create tsconfig.json
-
-```
-npx tsc --init
-```
-
-Update it:
-
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "outDir": "dist",
-    "rootDir": "bin",
-    "strict": true
-  }
-}
-```
-
-#### 3. Your bin/index.ts
-
-Example:
-```
-#!/usr/bin/env node
-
-console.log("CLI works!");
-```
-Even in TypeScript, keep:
-```
-#!/usr/bin/env node
-```
-at the top.
-
-#### 4. Update package.json
-
-IMPORTANT:
-
-Your "bin" must point to the COMPILED JS file, not .ts.
-```json
-{
-  "name": "package-name",
-  "version": "1.0.0",
-  "type": "module",
-
-  "bin": {
-    "package-name": "./dist/index.js"
-  },
-
-  "scripts": {
-    "build": "tsc"
-  }
-}
-```
-
-### About packages:
+## About packages installed:
 | Package  | Purpose                 |
 | -------- | ----------------------- |
 | fs-extra | Copy files easily       |
@@ -237,7 +244,8 @@ Your "bin" must point to the COMPILED JS file, not .ts.
 | prompts  | CLI questions           |
 | execa    | Run shell commands      |
 
-# Packages Created and Published
+
+# Custom packages Created and Published
 
 ## 1. create-react-express-mongo
 For direct installation with only limited tech stack.
