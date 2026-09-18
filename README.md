@@ -15,7 +15,7 @@ Complete guide to creating, testing, and publishing Node.js CLI packages to npm.
 
 ## Prerequisites
 
-- Node.js v16+ and npm v7+
+- Node.js v22+ and npm v10+
 - npm account for publishing (create at [npmjs.com](https://www.npmjs.com))
 - Understanding of npm `bin` field and package structure
 
@@ -558,7 +558,6 @@ Learn from these published packages:
 - [npm Package Documentation](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Verdaccio Documentation](https://verdaccio.org/)
-- [Node.js Executable Files](https://nodejs.org/en/knowledge/command-line/how-to-write-command-line-applications-in-nodejs/)
 
 ---
 
